@@ -11,7 +11,9 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh './configure && make && echo mouhebnn123. | sudo -S docker build -t mouhebgit/coinapi:latest .'
+				sh '$PASSWORD = "mouhebnn123."'
+				sh 'sudo -S $PASSWORD docker build -t mouhebgit/coinapi:latest .'
+
 			}
 		}
 
