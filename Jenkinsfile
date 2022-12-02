@@ -6,6 +6,11 @@ pipeline {
     }
     agent any
     stages {
+         stage('Cloning the git') {
+            steps{
+                git 'https://github.com/mouhebgit/coinapi.git'
+            }
+        }
         
         stage('Building image') {
             steps {
