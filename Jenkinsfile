@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Cloning the git') {
             steps{
-                git 'https://github.com/mouhebgit/coinapi.git'
+                git clone 'https://github.com/mouhebgit/coinapi.git'
             }
         }
         
