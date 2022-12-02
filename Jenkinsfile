@@ -1,7 +1,7 @@
 pipeline {
     environment {
         registry = "5095025250950252/coinapi"
-        registryCredential = '5095025250950252'
+        registryCredential = '6a8fba51-3e6b-4f04-863d-f8b55dd00d9b'
         dockerImage = ''
     }
     agent any
