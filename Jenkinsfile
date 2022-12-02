@@ -11,7 +11,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'sudo -S mouhebnn123 docker build -t mouhebgit/coinapi:latest .'
+				sh 'sudo docker build -t mouhebgit/coinapi:latest .'
 			}
 		}
 
