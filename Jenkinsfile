@@ -11,8 +11,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh '$PASSWORD = "mouhebnn123."'
-				sh 'sudo -S $PASSWORD docker build -t mouhebgit/coinapi:latest .'
+				sh 'sudo -S $jenkinspassword docker build -t mouhebgit/coinapi:latest .'
 
 			}
 		}
