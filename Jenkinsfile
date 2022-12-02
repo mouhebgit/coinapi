@@ -1,37 +1,39 @@
-pipeline {
-    environment {
-        registry = "5095025250950252/coinapi"
-        registryCredential = '6a8fba51-3e6b-4f04-863d-f8b55dd00d9b'
-        dockerImage = ''
-    }
-    agent any
-    stages {
-         stage('Cloning the git') {
-            steps{
-                git 'https://github.com/mouhebgit/coinapi.git'
-            }
-        }
-        
-        stage('Building image') {
-            steps {
-                script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                            }
-            }
-    }
-        stage ('Deploying image') {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
-        stage('Cleaning up') {
-            steps{
-                sh "docker rmi $registry:$BUILD_NUMBER"
-            }
-        }
-    }   
+pipeline{
+
+	agent any
+
+	environment {
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	}
+
+	stages {
+
+		stage('Build') {
+
+			steps {
+				sh 'docker build -t 5095025250950252/mycoinapp:latest .'
+			}
+		}
+
+		stage('Login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+
+		stage('Push') {
+
+			steps {
+				sh 'docker push 5095025250950252/mycoinapp:latest'
+			}
+		}
+	}
+
+	post {
+		always {
+			sh 'docker logout'
+		}
+	}
+
 }
