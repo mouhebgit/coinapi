@@ -11,7 +11,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'docker build -t 5095025250950252/mycoinapp:latest .'
+				sh 'docker build -t mouhebgit/coinapi:latest .'
 			}
 		}
 
